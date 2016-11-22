@@ -2,7 +2,7 @@
 #include<string.h>
 #include<gtk/gtk.h>
 
-#include "highscore.h"
+#include "../include/highscore.h"
 
 struct item
 {
