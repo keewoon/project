@@ -1,4 +1,4 @@
-#ifndef _TETRIS_H__
+#ifndef _TETRIS_H_
 #define _TETRIS_H_
 
 #include <gtk/gtk.h>
