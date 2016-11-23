@@ -21,6 +21,15 @@
 #endif
 #endif
 
+
+int game_play;
+char options_f[100];
+char *pause_str[2]={"Pause\0","Resume\0"};
+char *start_stop_str[2]={"Start Game\0","Stop game\0"};
+gint timer;
+
+
+
 int level_speeds[NUM_LEVELS] = {1000,886,785,695,616,546,483,428,379,336,298,
                                 264,234,207,183,162,144,127,113,100};
 void update_game_values()
