@@ -95,6 +95,47 @@ gint keyboard_event_handler(GtkWidget *widget, GdkEventKey *event, gpointer data
    return FALSE;
 }
 
+void game_show_next_block(GtkMenuItem *menuitem, gpointer user_data)
+{
+   options.shw_nxt = !options.shw_nxt;
+   if(!game_over)
+   {
+	if(!option.shw_nxt)
+	   draw_block(0,0,next_block, next_frame, TRUE, TRUE);
+	else
+	   draw_block(0,0,next_block, next_frame, FALSE, TRUE);
+   }
+}
+
+gint game_area_expose_event(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
+{
+   if(!game_over)
+   {
+	from_virtual();
+	move_blcok(0,0,0);
+   }
+   else
+	gdk_draw_rectangler(widget->window, 
+			    widget->style->black_gc,
+			    TRUE,
+			    0, 0,
+			    widget->allocation.width,
+			    widget->allocation.height);
+   return FALSE;
+}
+
+gboolean next_block_area_expose_event(GtkWidget *widget, GdkEventExpose *event, gpointer user_data)
+{
+        gdk_draw_rectangle(widget->window,
+               		   widget->style->black_gc,
+                	   TRUE,
+                	   0,0,
+                	   widget->allocation.width,
+                	   widget->allocation.height);
+        if(!game_over && options.shw_nxt)
+                draw_block(0,0,next_block,next_frame,FALSE,TRUE);
+        return FALSE;
+}
 
 
 
