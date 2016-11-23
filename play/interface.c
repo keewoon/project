@@ -37,3 +37,56 @@ void update_game_values()
         set_label(lines_label2,dummy);
 }
 
+gint keyboard_event_handler(GtkWidget *widget, GdkEventKey *event, gpointer data)
+{
+   int dropbonus = 0;
+   if(game_over || game_pause)
+	return FALSE;
+   switch(event->keyval)
+   {
+	case GDK_x; case GDK_X;
+	move_block(0,0,1);
+	event->keyval=0;
+	return TRUE;
+	break;
+	
+	case GDK_w: case GDK_W: case GDK_Up:
+        move_block(0,0,-1);
+        event->keyval=0;
+        return TRUE;
+        break;
+
+	case GDK_s: case GDK_S:
+      	move_down();
+      	event->keyval=0;
+      	return TRUE;
+      	break;
+
+	case GDK_a: case GDK_A: case GDK_Left:
+      	move_block(-1,0,0);
+      	event->keyval=0;
+      	return TRUE;
+      	break;
+
+	case GDK_d: case GDK_D: case GDK_Right:
+      	move_block(1,0,0);
+      	event->keyval=0;
+      	return TRUE;
+      	break;
+
+	case GDK_space: case GDK_Down:
+      	   while(move_down())
+        	dropbonus++;
+      	current_score += dropbonus*(current_level+1);
+      	update_game_values();
+     	event->keyval=0;
+       	return TRUE;
+     	break;
+   }
+   return FALSE;
+}
+
+
+
+
+
