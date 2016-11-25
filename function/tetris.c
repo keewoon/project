@@ -46,3 +46,28 @@ int block_data[7][4][2][4] =
 
 };
 
+void draw_block(int x,int y,int block,int frame,int clear,int next)
+{
+        int temp;
+        for(temp=0;temp < 4;temp++)
+                set_block(x+block_data[block][frame][0][temp],
+                        y+block_data[block][frame][1][temp],
+                        (clear ? 0 : block+1),
+                        next);
+}
+
+void to_virtual()
+{
+        int temp;
+        for(temp=0;temp < 4;temp++)
+                virtual[current_y+block_data[current_block][current_frame][1][temp]]
+                        [current_x+block_data[current_block][current_frame][0][temp]] = current_block+1;
+}
+void from_virtual()
+{
+        int temp_x,temp_y;
+        for(temp_y=0;temp_y < MAX_Y;temp_y++)
+                for(temp_x=0;temp_x < MAX_X;temp_x++)
+                        set_block(temp_x,temp_y,virtual[temp_y][temp_x],FALSE);
+}
+
