@@ -71,3 +71,18 @@ void from_virtual()
                         set_block(temp_x,temp_y,virtual[temp_y][temp_x],FALSE);
 }
 
+int valid_position(int x,int y,int block,int frame)
+{
+        int temp;
+        for(temp=0;temp < 4;temp++)
+                if(virtual[y+block_data[block][frame][1][temp]][x+block_data[block][frame][0][temp]] != 0 ||
+                                x+block_data[block][frame][0][temp] < 0 ||
+                                x+block_data[block][frame][0][temp] > MAX_X-1 ||
+                                y+block_data[block][frame][1][temp] < 0 ||
+                                y+block_data[block][frame][1][temp] > MAX_Y-1)
+                        return FALSE;
+        return TRUE;
+}
+
+
+
