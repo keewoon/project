@@ -46,7 +46,8 @@ void write_highscore()
 }
 
 core_close(){
-  gtk_widget_hide(highscore_window);}
+  gtk_widget_hide(highscore_window);
+}
 
 void show_highscore(int place)
 {
@@ -55,6 +56,7 @@ void show_highscore(int place)
         GtkWidget *table;
         GtkWidget *vbox;
         GtkWidget *Highscore_close_button;
+
         int temp;
         char dummy[40];
 
@@ -142,4 +144,33 @@ void show_highscore(int place)
 
         gtk_widget_show_all(highscore_window);
 }
-            
+int addto_highscore(char *name,long score, int level, int lines)
+{
+        int place = 0;
+        int temp,namelen;
+        int added = FALSE;
+
+        for(temp=NUM_HIGHSCORE-1;temp > -1;temp--)
+        {
+                if(score > highscore[temp].score || (highscore[temp].score == 0 && strlen(highscore[temp].name) == 0))
+                {
+                        place = temp;
+                        added = TRUE;
+                }
+        }
+        if(added)
+        {
+                for(temp=NUM_HIGHSCORE-1;temp > place;temp--)
+                        memcpy(&highscore[temp],&highscore[temp-1],sizeof(highscore[0]));
+                namelen = strlen(name);
+                if(namelen > 9)
+		namelen = 9;
+                memset(&highscore[place].name,0,sizeof(highscore[0].name));
+                memcpy(&highscore[place].name,name,namelen);
+                highscore[place].score = score;
+                highscore[place].level = level;
+                highscore[place].lines = lines;
+        }
+        return place+1;
+}
+                                                 
