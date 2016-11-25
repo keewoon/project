@@ -99,4 +99,47 @@ void show_highscore(int place)
         label = gtk_label_new(" Score: ");
         gtk_widget_show(label);
         gtk_table_attach_defaults(GTK_TABLE(table),label,4,5,0,1);
-                      
+  
+	for(temp=0;temp < NUM_HIGHSCORE;temp++)
+        {
+                sprintf(dummy,"%d",temp+1);
+                label = gtk_label_new(dummy);
+                gtk_table_attach_defaults(GTK_TABLE(table),label,0,1,temp+1,temp+2);
+                gtk_misc_set_alignment(GTK_MISC(label),0.5,0);
+
+                sprintf(dummy,"%s",highscore[temp].name);
+                label = gtk_label_new(dummy);
+
+                if(place && place-1 == temp)
+                  set_gtk_color_style(label,0,0,0xffff);
+		 gtk_table_attach_defaults(GTK_TABLE(table),label,1,2,temp+1,temp+2);
+                gtk_misc_set_alignment(GTK_MISC(label),0.5,0);
+
+                sprintf(dummy,"%d",highscore[temp].lines);
+                label = gtk_label_new(dummy);
+                gtk_table_attach_defaults(GTK_TABLE(table),label,2,3,temp+1,temp+2);
+                gtk_misc_set_alignment(GTK_MISC(label),0.5,0);
+
+                sprintf(dummy,"%d",highscore[temp].level);
+                label = gtk_label_new(dummy);
+                gtk_table_attach_defaults(GTK_TABLE(table),label,3,4,temp+1,temp+2);
+                gtk_misc_set_alignment(GTK_MISC(label),0.5,0);
+
+                sprintf(dummy,"%lu",highscore[temp].score);
+                label = gtk_label_new(dummy);
+                if(place && place-1 == temp)
+                  set_gtk_color_style(label,0xffff,0,0);
+                gtk_table_attach_defaults(GTK_TABLE(table),label,4,5,temp+1,temp+2);
+	        gtk_misc_set_alignment(GTK_MISC(label),1,0);
+        }
+
+      	 Highscore_close_button = gtk_button_new_with_label("Close");
+        gtk_signal_connect(GTK_OBJECT(Highscore_close_button), "clicked",
+        GTK_SIGNAL_FUNC(highscore_close), NULL);
+        gtk_box_pack_start(GTK_BOX(vbox),Highscore_close_button,FALSE,TRUE,0);
+        GTK_WIDGET_SET_FLAGS(Highscore_close_button, GTK_CAN_DEFAULT);
+        gtk_widget_grab_default(Highscore_close_button);
+
+        gtk_widget_show_all(highscore_window);
+}
+            
