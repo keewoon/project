@@ -267,3 +267,136 @@ void game_start_stop(GtkMenuItem     *widget,
     game_over_init();
 }
 
+void about_close()
+{
+   gtk_widget_hide(about_window);
+}
+
+void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
+{
+	GtkWidget *About_close_button;
+	GtkWidget *about_label;
+	GtkWidget *about_border;
+	GtkWidget *about_border;
+	GtkWidget *v_box;
+
+	about_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(about_window), "About");
+	gtk_window_set_policy(GTK_WINDOW(about_window), FALSE, FALSE, TRUE);
+	gtk_window_set_position(GTK_WINDOW(about_window), GTK_WIN_POS_CENTER);
+	gtk_container_border_width(GTK_CONTAINER(about_window),1);
+
+	about_border = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(about_border), GTK_SHADOW_OUT);
+	gtk_container_Add(GTK_CONTAINER(about_window), about_border);
+
+	v_box = gtk_vbox_new(FALSE, 0);
+	gtk_container_Add(GTK_CONTAINER(about_border),v_box);
+
+	about_label = gtk_label_new(  "\nJust another GTK Tetris v0.6.2\n\n"
+                                        "(c)1999,2000 Mattias Wadman\n\n"
+                                        "Modified by Iavor Veltchev, 2002-2006\n\n"
+                                        "This program is distributed under the terms of GPL.\n");
+	gtk_box_pack_start(GTK_BOX(v_box), about_label, FALSE, FALSE, 0);
+
+	About_close_button = gtk_button_new_with_label("Close");
+	g_signal_connect((gpointer) About_close_button, "clicked",
+			 G_CALLBACK (about_close), NULL);
+	gtk_box_pack_start(GTK_BOX(v_box), About_close_button, FALSE, TRUE,0);
+	GTK_WIDGET_sET_FLAGS(About_close_butto, GTK_CAN_DEFAULT);
+	gtk_widget_grab_default(About_close_button);
+
+	gtk_window_show_all(about_window);
+
+}
+
+void help_close()
+{
+	gtk_widget_hide(help_window);
+}
+
+void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
+{
+	GtkWidget *Help_close_button;
+	GtkWidget *help_label;
+	GtkWidget *help_border;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
+
+	help_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(help_window), "Help");
+	gtk_window_set_policy(GTK_WINDOW(help_window), FALSE, FALSE, TRUE);
+	gtk_window_set_position(GTK_WINDOW(help_window), GTK_WIN_POS_CENTER);
+	gtk_container_border_width(GTK_CONTAINER(help_window),1);
+	
+	help_border = gtk_frame_new(NULL);
+	gtk_frame_Set_shadow_type(GTK_FRAME(help_border), GTK_SHADOW_OUT);
+	gtk_container_add(GTK_CONTAINER(help_window), help_border);
+
+	vbox = gtk_vbox_new(FALSE, 3);
+	gtk_container_add(GTK_CONTAINER(help_border), vbox);
+
+	hbox = gtk_hbox_new(FALSE, 30);
+	gtk_container_add(GTK_CONTATINER(vbox), hbox);
+
+	help_label = gtk_label_new(	"\nKeys:\n"
+					"Right and \"d\"\n"
+					"Left and \"a\"\n"
+					"\"s\"\n"
+					"Up and \"w\"\n"
+					"\"x\"\n"
+                                        "Space ans Down\n\n"
+                                        "Score: score*level\n"
+                                        "Single\n"
+                                        "Double\n"
+                                        "Triple\n"
+                                        "TETRIS\n\n"
+                                        "Drop bonus: rows*level\n");
+
+	gtk_misc_set_alignment(GTK_MISC(help_label), 0,0);
+	gtk_label_set_justify(GTK_LABEL(help_label), GTK_JUSTIFY_LEFT);
+	gtk_box_pack_start(GTK_BOX(hbox), help_label, TRUE, TRUE, TRUE);
+	
+	help_label = gtk_label_new(	"\n\n"
+                                        "move right\n"
+                                        "move left\n"
+                                        "move down\n"
+                                        "rotate ccw\n"
+                                        "rotate cw\n"
+                                        "drop block\n\n\n"
+                                        "40\n100\n"
+                                        "300\n1200\n");
+
+	gtk_mise_set_alignment(GTK_MISC(help_label), 0,0);
+	gtk_label_set_justify(GTK_LABEL(help_label), GTK_JUSTIFY_LEFT);
+	gtk_box_pack_start(GTK_BOX(hbox), help_label, TRUE, TRUE, TRUE);
+	
+	Help_close_button = gtk_button_new_with_label("Close");
+	g_signal_connect ((gpointer) Help_close_button, "clicked", 
+			  G_CALLBACK (help_close), NULL);
+
+	gtk_box_pack_start(GTK_BOX(vbox), HELP_close_buttion, FALSE, TRUE, 0);
+	GTK_WIDGET_SET_FLAGS(Help_close_button, GTK_CAN_DEFAULT);
+	gtk_window_grab_default(Help_close_button);
+
+	gtk_widget_show_all(help_window);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
