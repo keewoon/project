@@ -8,7 +8,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-#include "../include/tetris.h"
+#include "../include/interface.h"
 #include "tetris.xpm"
 
 #ifdef BIGBLOCKS
