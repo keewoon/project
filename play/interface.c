@@ -505,9 +505,33 @@ gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,TRUE,0);
   gtk_widget_set_sensitive(menu_game_quick,FALSE);
 }
 
+void show_highscore_wrapper(GtkMenuItem	*menuitem, gpointer	user_data)
+{
+	read_highscore();
+	show_highscore(0);
+}
 
+void save_option(GtkMenuItem	*menuitem, gpointer	user_data)
+{
+	FILE *fp;
+	if(!(fp = fopen(option_f, "wb")))
+	{
+		printf("gtktetris: Write ERROR!\n");
+		return;
+	}
+	fwrite(&options, 1, sizeof(options), fp);
+	fclose(fp);
+}
 
-
+void read_options()
+{
+	FILE *fp;
+	if(fp = fopen(options_f, "rb"))
+	{
+		fread(&options, 1, sizeof(options), fp);
+		fclose(fp);
+	}
+}
 
 
 
