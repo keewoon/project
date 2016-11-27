@@ -185,6 +185,21 @@ if(options.shw_nxt)
         }
 }
 
+void make_noise(int level,int height)
+{
+        int x,y;
+
+        if(!level || !height)
+                return;
+
+        for(y=MAX_Y-height;y<MAX_Y;y++)
+        {
+                for(x=0;x<MAX_X;x++)
+                        virtual[y][x] = do_random(blocks)+1;
+                for(x=0;x<MAX_X-level;x++)
+                        virtual[y][do_random(MAX_X)] = 0;
+        }
+}
 
 
 
