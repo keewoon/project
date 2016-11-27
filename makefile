@@ -1,4 +1,4 @@
-	OGRAM = gtktetris
+PROGRAM = gtktetris
 GETTEXT_PACKAGE = gtktetris
 OBJS = misc.o highscore.o tetris.o interface.o
 BIN_PATH = /usr/local/bin
@@ -38,7 +38,7 @@ uninstall:
 
 pack:   
         rm -rf gtktetris.tgz
-        tar -czvf gtktetris.tgz *.c *.h *.xpm Makefile README THANKS ChangeLog
+        tar -czvf gtktetris.tgz *.c *.h *.xpm Makefile
 
 
 
