@@ -15,30 +15,30 @@ CFLAGS = `pkg-config gtk+-2.0 --cflags` -Wall -O2 \
 LIBS = `pkg-config gtk+-2.0 --libs`
 
 all: $(OBJS)
-        $(CC) $(CFLAGS) $(OBJS) -o $(PROGRAM) $(LIBS)
-        strip $(PROGRAM)
+	$(CC) $(CFLAGS) $(OBJS) -o $(PROGRAM) $(LIBS)
+	strip $(PROGRAM)
 
 clean: 
-        rm -f *.o *~ $(PROGRAM)
+	rm -f *.o *~ $(PROGRAM)
 
 install:
-        mkdir -p $(BIN_PATH)
-        mkdir -p $(HIGHSCORE_PATH)
-        install -o root -g $(GROUP) $(PROGRAM) $(BIN_PATH)
-        if [ ! -f $(HIGHSCORE_FILE) ]; then \
+	mkdir -p $(BIN_PATH)
+	mkdir -p $(HIGHSCORE_PATH)
+	install -o root -g $(GROUP) $(PROGRAM) $(BIN_PATH)
+	if [ ! -f $(HIGHSCORE_FILE) ]; then \
                 : > $(HIGHSCORE_FILE); \
         fi
-        chown root.$(GROUP) $(HIGHSCORE_FILE)
-        chmod 666 $(HIGHSCORE_FILE)
+	chown root.$(GROUP) $(HIGHSCORE_FILE)
+	chmod 666 $(HIGHSCORE_FILE)
 #       ln -s $(BIN_PATH)/$(PROGRAM) /usr/games/bin/tetris
 uninstall:
-        rm -i $(BIN_PATH)/$(PROGRAM)
-        rm -i $(HIGHSCORE_FILE)
-        rmdir $(HIGHSCORE_PATH)
+	rm -i $(BIN_PATH)/$(PROGRAM)
+	rm -i $(HIGHSCORE_FILE)
+	rmdir $(HIGHSCORE_PATH)
 
 pack:   
-        rm -rf gtktetris.tgz
-        tar -czvf gtktetris.tgz *.c *.h *.xpm Makefile
+	rm -rf gtktetris.tgz
+	tar -czvf gtktetris.tgz *.c *.h *.xpm Makefile
 
 
 
