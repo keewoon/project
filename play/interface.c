@@ -533,8 +533,59 @@ void read_options()
 	}
 }
 
+int main(int argc,char *argv[])
+{
+	char dmmy[20];
+	GtKWidget *main_window;
+	GtKWidget *v_box;
+	GtKWidget *h_box;
+	GtKWidget *box1;
+	GtKWidget *box2;
+	GtKWidget *right_side;
+	GtKWidget *game_border;
+	GtKWidget *next_block_border;
+	GdkBitmap *mask;
+	GtKWidget *menu_bar;
+	GtKWidget *menu_game;
+	GtKWidget *menu_game_menu;
+	GtKWidget *separatormenuitem1;
+	GtkWidget *separator1;
+	GtkWidget *menu_settings;
+ 	GtkWidget *menu_settings_menu;
+	GtkWidget *menu_help;
+	GtkWidget *menu_help_menu;
+	GtkWidget *help1;
+ 	GtkWidget *high_scores1;
+	GtkWidget *separator2;
+ 	GtkWidget *about1;
+	GtkAccelGroup* accel_group;
+	struct sigaction sa;
+	  //init game values
+	  game_play=FALSE;
+	  get_opt_file(options_f,100);
+	  read_options();
+	  game_over = TRUE;
+	  game_pause = FALSE;
+	  current_x = current_y = 0;
+	  current_block = current_frame = 0;
+	  current_score = current_lines = 0;
+	  current_level = options.level;
+	  next_block = next_frame = 0;
+	  // seed random generator
+	  srandom(time(NULL));
+	  //options.shw_nxt = TRUE;
 
 
+	  gtk_set_locale();
+	  gtk_init(&argc,&argv);
+
+	  accel_group = gtk_accel_group_new();
+
+	  GList *IconList=NULL;
+	  IconList=g_list_append(IconList,
+                         gdk_pixbuf_new_from_xpm_data((gchar const **)tetris_xpm));
+
+}
 
 
 
