@@ -128,6 +128,75 @@ int check_lines()
         return lines;
 }
 
+int move_down()
+{
+        int lines;
+
+        if(!valid_position(current_x,current_y+1,current_block,current_frame))
+        {
+                to_virtual();
+                lines = check_lines();
+                if(lines > 0)
+                {
+                        from_virtual();
+                        current_lines += lines;
+                        if((int)current_lines/10 > current_level)
+                                current_level = (int)current_lines/10;
+                        if(current_level > 19)
+                                current_level = 19;
+			    current_score += lines_score[lines-1]*(current_level+1);
+                        update_game_values();
+                }
+                new_block();
+                move_block(0,0,0);
+                return FALSE;
+        }
+        else
+        {
+                move_block(0,1,0);
+                return TRUE;
+        }
+}
+
+
+void new_block()
+{
+        current_block = next_block;
+        current_frame = next_frame;
+        next_block = do_random(blocks);
+        next_frame = do_random(block_frames[next_block]);
+        current_x = (int)(MAX_X/2)-1;
+        current_y = 0;
+        if(!valid_position(current_x,current_y,current_block,current_frame))
+        {
+                game_over_init();
+                return;
+        }
+
+        // hack to make the block start at top..
+        if(valid_position(current_x,current_y-2,current_block,current_frame))
+                current_y-=2;
+        else if(valid_position(current_x,current_y-1,current_block,current_frame))
+                current_y-=1;
+if(options.shw_nxt)
+        {
+                draw_block(0,0,current_block,current_frame,TRUE,TRUE);
+                draw_block(0,0,next_block,next_frame,FALSE,TRUE);
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
