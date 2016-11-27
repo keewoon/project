@@ -396,45 +396,45 @@ void game_new_accept()
 
 void game_new_wrapper()
 {
-  options.level = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_level));
-  options.noise_l = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_noise_level));
-  options.noise_h = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_noise_height));
+	options.level = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_level));
+	options.noise_l = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_noise_level));
+	options.noise_h = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin_noise_height));
 
-  gtk_widget_set_sensitive(menu_game_quick,FALSE);
-  gtk_widget_set_sensitive(menu_game_start,FALSE);
-  gtk_widget_set_sensitive(menu_game_stop,TRUE);
-  game_play=!game_play;
-  gtk_label_set(GTK_LABEL(Start_stop_button_label),start_stop_str[1]);
-  gtk_widget_set_sensitive(Pause_button,TRUE);
-  gtk_widget_grab_default(Pause_button);
-  game_init();
-  make_noise(options.noise_l,options.noise_h);
-  from_virtual();
-  move_block(0,0,0);
-  current_level = options.level;
-  timer = gtk_timeout_add(level_speeds[current_level],(GtkFunction)game_loop,NULL);
-  gtk_widget_hide(new_game_window);
+	gtk_widget_set_sensitive(menu_game_quick,FALSE);
+	gtk_widget_set_sensitive(menu_game_start,FALSE);
+	gtk_widget_set_sensitive(menu_game_stop,TRUE);
+	game_play=!game_play;
+	gtk_label_set(GTK_LABEL(Start_stop_button_label),start_stop_str[1]);
+	gtk_widget_set_sensitive(Pause_button,TRUE);
+	gtk_widget_grab_default(Pause_button);
+	game_init();
+	make_noise(options.noise_l,options.noise_h);
+	from_virtual();
+	move_block(0,0,0);
+	current_level = options.level;
+	timer = gtk_timeout_add(level_speeds[current_level],(GtkFunction)game_loop,NULL);
+	gtk_widget_hide(new_game_window);
 }
 
 void show_new_game_close(int close)
 {
-  gtk_widget_set_sensitive(menu_game_start,TRUE);
-  gtk_widget_set_sensitive(menu_game_quick,TRUE);
-  if(close)
-    gtk_widget_hide(new_game_window);
+	gtk_widget_set_sensitive(menu_game_start,TRUE);
+	gtk_widget_set_sensitive(menu_game_quick,TRUE);
+	if(close)
+	gtk_widget_hide(new_game_window);
 }
 
-oid show_new_game(GtkMenuItem     *menuitem,
+void show_new_game(GtkMenuItem     *menuitem,
                    gpointer         user_data)
 {
-  GtkWidget *label;
-  GtkWidget *frame;
-  GtkWidget *vbox,*hbox;
-  GtkWidget *table;
-  GtkWidget *button;
-  GtkWidget *button1;
-  GtkWidget *button2;
-  GtkAdjustment *adj;
+	GtkWidget *label;
+	GtkWidget *frame;
+	GtkWidget *vbox,*hbox;
+	GtkWidget *table;
+	GtkWidget *button;
+	GtkWidget *button1;
+	GtkWidget *button2;
+ 	GtkAdjustment *adj;
 
   new_game_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -449,7 +449,7 @@ oid show_new_game(GtkMenuItem     *menuitem,
   vbox = gtk_vbox_new(FALSE,2);
   gtk_container_add(GTK_CONTAINER(new_game_window),vbox);
 
-frame = gtk_frame_new(NULL);
+ frame = gtk_frame_new(NULL);
   gtk_box_pack_start(GTK_BOX(vbox),frame,TRUE,TRUE,TRUE);
 
   table = gtk_table_new(3,2,TRUE);
@@ -481,7 +481,7 @@ frame = gtk_frame_new(NULL);
   g_signal_connect ((gpointer) button, "clicked",
                     G_CALLBACK (game_new_wrapper),
                     NULL);
-gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,TRUE,0);
+  gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,TRUE,0);
   GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
   gtk_widget_grab_default (button);
 
@@ -595,73 +595,114 @@ int main(int argc,char *argv[])
 
 
 	// vertical box
-  v_box = gtk_vbox_new(FALSE,0);
-  gtk_container_add(GTK_CONTAINER(main_window),v_box);
-  gtk_widget_show(v_box);
+	v_box = gtk_vbox_new(FALSE,0);
+	gtk_container_add(GTK_CONTAINER(main_window),v_box);
+	gtk_widget_show(v_box);
 
-  // menu stuff
-  menu_bar = gtk_menu_bar_new();
-  gtk_widget_show(menu_bar);
-  gtk_box_pack_start(GTK_BOX(v_box),menu_bar,FALSE,FALSE,0);
+  	// menu stuff
+	menu_bar = gtk_menu_bar_new();
+	gtk_widget_show(menu_bar);
+	gtk_box_pack_start(GTK_BOX(v_box),menu_bar,FALSE,FALSE,0);
 
-  //Game sub-menu
-  menu_game=gtk_menu_item_new_with_mnemonic ("_Game");
-  gtk_widget_show(menu_game);
-  gtk_container_add (GTK_CONTAINER (menu_bar), menu_game);
+ 	 //Game sub-menu
+	menu_game=gtk_menu_item_new_with_mnemonic ("_Game");
+	gtk_widget_show(menu_game);
+	gtk_container_add (GTK_CONTAINER (menu_bar), menu_game);
 
-  menu_game_menu=gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_game), menu_game_menu);
+	menu_game_menu=gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_game), menu_game_menu);
 
-menu_game_quick = gtk_menu_item_new_with_mnemonic ("Start Game");
-  gtk_widget_show (menu_game_quick);
-  gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_quick);
-  g_signal_connect ((gpointer) menu_game_quick, "activate",
+	menu_game_quick = gtk_menu_item_new_with_mnemonic ("Start Game");
+	gtk_widget_show (menu_game_quick);
+	gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_quick);
+	g_signal_connect ((gpointer) menu_game_quick, "activate",
                     G_CALLBACK (game_start_stop),
                     NULL);
-  gtk_widget_add_accelerator (menu_game_quick, "activate", accel_group,
+	gtk_widget_add_accelerator (menu_game_quick, "activate", accel_group,
                               GDK_G, GDK_CONTROL_MASK,
                               GTK_ACCEL_VISIBLE);
 
-  menu_game_stop = gtk_menu_item_new_with_mnemonic ("Stop Game");
-  gtk_widget_show (menu_game_stop);
-  gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_stop);
-  g_signal_connect ((gpointer) menu_game_stop, "activate",
+	menu_game_stop = gtk_menu_item_new_with_mnemonic ("Stop Game");
+	gtk_widget_show (menu_game_stop);
+	gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_stop);
+	g_signal_connect ((gpointer) menu_game_stop, "activate",
                     G_CALLBACK (game_start_stop),
                     NULL);
-  gtk_widget_add_accelerator (menu_game_stop, "activate", accel_group,
+	gtk_widget_add_accelerator (menu_game_stop, "activate", accel_group,
                               GDK_O, GDK_CONTROL_MASK,
                               GTK_ACCEL_VISIBLE);
-  gtk_widget_set_sensitive(menu_game_stop,FALSE);
-
- menu_game_pause = gtk_check_menu_item_new_with_mnemonic ("Pause");
-  gtk_widget_show (menu_game_pause);
-  gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_pause);
-  g_signal_connect ((gpointer) menu_game_pause, "activate",
+	gtk_widget_set_sensitive(menu_game_stop,FALSE);
+	menu_game_pause = gtk_check_menu_item_new_with_mnemonic ("Pause");
+	gtk_widget_show (menu_game_pause);
+	gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_pause);
+	g_signal_connect ((gpointer) menu_game_pause, "activate",
                     G_CALLBACK (game_set_pause),
                     NULL);
-  gtk_widget_add_accelerator (menu_game_pause, "activate", accel_group,
+	gtk_widget_add_accelerator (menu_game_pause, "activate", accel_group,
                               GDK_P, GDK_CONTROL_MASK,
                               GTK_ACCEL_VISIBLE);
 
-  separatormenuitem1 = gtk_menu_item_new ();
-  gtk_widget_show (separatormenuitem1);
-  gtk_container_add (GTK_CONTAINER (menu_game_menu), separatormenuitem1);
-  gtk_widget_set_sensitive (separatormenuitem1, FALSE);
+	separatormenuitem1 = gtk_menu_item_new ();
+	gtk_widget_show (separatormenuitem1);
+	gtk_container_add (GTK_CONTAINER (menu_game_menu), separatormenuitem1);
+	gtk_widget_set_sensitive (separatormenuitem1, FALSE);
 
-  menu_game_quit = gtk_menu_item_new_with_mnemonic ("Quit");
-  gtk_widget_show (menu_game_quit);
-  gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_quit);
-  g_signal_connect ((gpointer) menu_game_quit, "activate",
+	menu_game_quit = gtk_menu_item_new_with_mnemonic ("Quit");
+	gtk_widget_show (menu_game_quit);
+	gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_quit);
+	g_signal_connect ((gpointer) menu_game_quit, "activate",
                     G_CALLBACK (gtk_main_quit),
- gtk_widget_add_accelerator(menu_game_quit,"activate", accel_group,
+	gtk_widget_add_accelerator(menu_game_quit,"activate", accel_group,
                              GDK_X, GDK_CONTROL_MASK,
                              GTK_ACCEL_VISIBLE);
 
 
 
+//Settings sub-menu
+  menu_settings = gtk_menu_item_new_with_mnemonic ("_Settings");
+  gtk_widget_show (menu_settings);
+  gtk_container_add (GTK_CONTAINER (menu_bar), menu_settings);
+
+  menu_settings_menu=gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_settings),
+                             menu_settings_menu);
+
+  menu_game_start = gtk_menu_item_new_with_mnemonic ("Level Settings");
+  gtk_widget_show (menu_game_start);
+  gtk_container_add (GTK_CONTAINER (menu_settings_menu), menu_game_start);
+  g_signal_connect ((gpointer) menu_game_start, "activate",
+                    G_CALLBACK (show_new_game),
+                    NULL);
+
+  menu_game_show_next_block = gtk_check_menu_item_new_with_mnemonic ("Show next block");
+  gtk_widget_show (menu_game_show_next_block);
+  gtk_container_add (GTK_CONTAINER (menu_settings_menu),
+ menu_game_show_next_block);
+  if (options.shw_nxt)
+    gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_game_show_next_block),
+                                    TRUE);
+  g_signal_connect ((gpointer) menu_game_show_next_block, "activate",
+                    G_CALLBACK (game_show_next_block),
+                    NULL);
+  gtk_widget_add_accelerator (menu_game_show_next_block, "activate",
+                              accel_group,
+                              GDK_N, GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
 
 
+  separator1 = gtk_menu_item_new ();
+  gtk_widget_show (separator1);
+  gtk_container_add (GTK_CONTAINER (menu_settings_menu), separator1);
+  gtk_widget_set_sensitive (separator1, FALSE);
 
+  menu_save_options = gtk_menu_item_new_with_mnemonic ("Save Settings");
+
+  gtk_widget_show (menu_save_options);
+  gtk_container_add (GTK_CONTAINER (menu_settings_menu),
+                     menu_save_options);
+  g_signal_connect ((gpointer) menu_save_options, "activate",
+                    G_CALLBACK (save_options),
+                    NULL);
 
 
 
