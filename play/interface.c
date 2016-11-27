@@ -584,6 +584,15 @@ int main(int argc,char *argv[])
 	  GList *IconList=NULL;
 	  IconList=g_list_append(IconList,
                          gdk_pixbuf_new_from_xpm_data((gchar const **)tetris_xpm));
+	
+	// window
+	  main_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	  gtk_window_set_policy(GTK_WINDOW(main_window),FALSE,FALSE,TRUE);
+	  gtk_window_set_title(GTK_WINDOW(main_window),"GTK Tetris");
+	  gtk_window_set_icon_list(GTK_WINDOW(main_window),IconList);
+	  g_signal_connect ((gpointer) main_window, "key_press_event", G_CALLBACK (keyboard_event_handler), NULL);
+	  g_signal_connect ((gpointer) main_window, "delete_event", G_CALLBACK (gtk_main_quit), NULL);
+
 
 }
 
