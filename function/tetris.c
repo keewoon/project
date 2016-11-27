@@ -201,8 +201,18 @@ void make_noise(int level,int height)
         }
 }
 
-
-
+void game_init()
+{
+        game_over = FALSE;
+        game_pause = FALSE;
+        current_score = 0;
+        current_level = options.level;
+        current_lines = 0;
+        memset(virtual,0,sizeof(virtual));
+        new_block();
+        move_block(0,0,0);
+        update_game_values();
+}
 
 
 
