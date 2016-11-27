@@ -85,4 +85,56 @@ int valid_position(int x,int y,int block,int frame)
 }
 
 
+void move_block(int x,int y,int f)
+{
+        int last_frame = current_frame;
+        int last_block = current_block;
+
+        if(f != 0)
+                current_frame = (block_frames[current_block]+(current_frame+f))%block_frames[current_block];
+        if(valid_position(current_x+x,current_y+y,current_block,current_frame))
+        {
+                draw_block(current_x,current_y,last_block,last_frame,TRUE,FALSE);
+                current_x += x;
+                current_y += y;
+                draw_block(current_x,current_y,current_block,current_frame,FALSE,FALSE);
+        }
+        else
+        {
+                current_block = last_block;
+                current_frame = last_frame;
+	}
+}
+
+int check_lines()
+{
+        int temp_x,temp_y,temp,line,lines=0;
+        for(temp_y=0;temp_y < MAX_Y;temp_y++)
+        {
+                line = TRUE;
+                for(temp_x=0;temp_x < MAX_X;temp_x++)
+                        if(virtual[temp_y][temp_x] == 0)
+                                line = FALSE;
+                if(line)
+                {
+                        lines++;
+                        for(temp=temp_y;temp > 0;temp--)
+                                memcpy(virtual[temp],virtual[temp-1],sizeof(virtual[0]));
+                        memset(virtual[0],0,sizeof(virtual[0]));
+                        usleep(50000); // tweak this?
+                        from_virtual();
+                }
+        }
+        return lines;
+}
+
+
+
+
+
+
+
+
+
+
 
