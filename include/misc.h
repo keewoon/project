@@ -1,5 +1,5 @@
-#ifndef _HIGHSCORE_H_
-#define _HIGHSCORE_H_
+#ifndef _MISC_H_
+#define _MISC_H_
 
 #include <gtk/gtk.h>
 
@@ -24,7 +24,6 @@
 #endif
 #endif
 
-
 #define NUM_LEVELS 20
 #define NUM_HIGHSCORE 10
 
@@ -47,7 +46,6 @@ int next_block;
 int next_frame;
 //int show_next_block;
 
-
 struct Options
 {
   int level;
@@ -59,12 +57,17 @@ struct Options
 struct Options options;
 
 
-// highscore.c
-void read_highscore();
-void write_highscore();
-void show_highscore(int place);
-void check_highscore();
-int addto_highscore(char *name,long score, int level, int lines);
+//misc.c
+void set_block(int x, int y, int color, int next);
+int do_random(int max);
+void set_label(GtkWidget *label, char *str);
+void add_submenu((gchar *name, GtkWidget *menu, GtkWidget *menu_bar, int right);
+GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
+GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
+void set_gtk_color_style(GtkWidget *w, long red, long green, long blue);
+void get_opt_file(char *buf, int len);
+GtkWidget *label_box(GtkWidget *parent, GtkWidget *label, gchar *label_text);
 
 #endif
+
 

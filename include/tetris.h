@@ -1,5 +1,5 @@
-#ifndef _HIGHSCORE_H_
-#define _HIGHSCORE_H_
+#ifdef _TETRIS_H_
+#define _TETRIS_H_
 
 #include <gtk/gtk.h>
 
@@ -24,7 +24,6 @@
 #endif
 #endif
 
-
 #define NUM_LEVELS 20
 #define NUM_HIGHSCORE 10
 
@@ -45,9 +44,7 @@ int current_level;
 int current_lines;
 int next_block;
 int next_frame;
-//int show_next_block;
-
-
+   
 struct Options
 {
   int level;
@@ -58,13 +55,18 @@ struct Options
 
 struct Options options;
 
+// tetris.c
+void draw_block(int x,int y,int block,int frame,int clear,int next);
+void to_virtual();
+void from_virtual();
+int valid_position(int x,int y,int block,int frame);
+void move_block(int x,int y,int f);
+int check_lines();
+int move_down();
+void new_block();
+void game_over_clean();
+void game_init();
+void make_noise(int level,int height);    
 
-// highscore.c
-void read_highscore();
-void write_highscore();
-void show_highscore(int place);
-void check_highscore();
-int addto_highscore(char *name,long score, int level, int lines);
 
-#endif
-
+#endif                  

@@ -59,7 +59,7 @@ struct Options options;
 //interface.c
 void update_game_values();
 int game_loop();
-void game_over_init():
+void game_over_init();
 void game_set_pause();
 
 #endif
