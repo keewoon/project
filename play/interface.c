@@ -853,18 +853,32 @@ gtk_box_pack_start(GTK_BOX(right_side),level_label2,FALSE,FALSE,3);
   GTK_WIDGET_SET_FLAGS(Start_stop_button, GTK_CAN_DEFAULT);
   gtk_widget_grab_default(Start_stop_button);
 
+ //Pause
+  Pause_button = gtk_button_new();
+  gtk_widget_show(Pause_button);
+  g_signal_connect ((gpointer) Pause_button, "clicked",
+                    G_CALLBACK (game_set_pause_b),
+                    NULL);
+  Pause_button_label = gtk_label_new(pause_str[0]);
+  box1 = label_box(right_side, Pause_button_label, pause_str[0] );
+  gtk_widget_show(box1);
+  gtk_container_add (GTK_CONTAINER (Pause_button), box1);
+  gtk_box_pack_start(GTK_BOX(right_side),Pause_button,FALSE,FALSE,3);
+  GTK_WIDGET_SET_FLAGS(Pause_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_sensitive(Pause_button,FALSE);
 
+  gtk_window_add_accel_group (GTK_WINDOW (main_window), accel_group);
 
+  gtk_widget_show(main_window);
 
+ // Block images...
+  blocks_pixmap = gdk_pixmap_create_from_xpm_d(game_area->window,
+                                               &mask,
+                                               NULL,
+                                               (gchar **)blocks_xpm);
 
-
-
-
-
-
-
-
-
+  gtk_main ();
+  return 0;
 
 
 }
