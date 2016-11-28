@@ -745,6 +745,16 @@ high_scores1 = gtk_menu_item_new_with_mnemonic ("High-scores");
                     G_CALLBACK (show_about),
                     NULL);
 
+ // horizontal box
+  h_box = gtk_hbox_new(FALSE,1);
+  gtk_widget_show(h_box);
+  gtk_box_pack_start(GTK_BOX(v_box),h_box,FALSE,FALSE,0);
+
+  // game_border
+  game_border = gtk_frame_new(NULL);
+  gtk_frame_set_shadow_type(GTK_FRAME(game_border),GTK_SHADOW_IN);
+  gtk_box_pack_start(GTK_BOX(h_box),game_border,FALSE,FALSE,1);
+  gtk_widget_show(game_border);
 
 
 
