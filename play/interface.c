@@ -704,7 +704,46 @@ int main(int argc,char *argv[])
                     G_CALLBACK (save_options),
                     NULL);
 
+	//Help sub-menu
+  menu_help=gtk_menu_item_new_with_mnemonic ("_Help");
+  gtk_widget_show (menu_help);
+  gtk_container_add (GTK_CONTAINER (menu_bar), menu_help);
 
+  gtk_menu_item_set_right_justified (GTK_MENU_ITEM(menu_help),TRUE);
+
+  menu_help_menu = gtk_menu_new();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menu_help),
+                             menu_help_menu);
+
+  help1 = gtk_menu_item_new_with_mnemonic ("Help");
+  gtk_widget_show (help1);
+  gtk_container_add (GTK_CONTAINER (menu_help_menu), help1);
+  g_signal_connect ((gpointer) help1, "activate",
+                    G_CALLBACK (show_help),
+                    NULL);
+  gtk_widget_add_accelerator (help1, "activate",
+                              accel_group,
+                              GDK_F1, (GdkModifierType) 0,
+                              GTK_ACCEL_VISIBLE);
+
+high_scores1 = gtk_menu_item_new_with_mnemonic ("High-scores");
+  gtk_widget_show (high_scores1);
+  gtk_container_add (GTK_CONTAINER (menu_help_menu), high_scores1);
+  g_signal_connect ((gpointer) high_scores1, "activate",
+                    G_CALLBACK (show_highscore_wrapper),
+                    NULL);
+
+  separator2 = gtk_menu_item_new ();
+  gtk_widget_show (separator2);
+  gtk_container_add (GTK_CONTAINER (menu_help_menu), separator2);
+  gtk_widget_set_sensitive (separator2, FALSE);
+
+  about1 = gtk_menu_item_new_with_mnemonic ("About");
+  gtk_widget_show (about1);
+  gtk_container_add (GTK_CONTAINER (menu_help_menu), about1);
+  g_signal_connect ((gpointer) about1, "activate",
+                    G_CALLBACK (show_about),
+                    NULL);
 
 
 
