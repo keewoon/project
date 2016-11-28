@@ -802,8 +802,56 @@ high_scores1 = gtk_menu_item_new_with_mnemonic ("High-scores");
   gtk_box_pack_start(GTK_BOX(right_side),next_block_border,FALSE,FALSE,0);
   gtk_widget_show(next_block_border);
 
+// the score,level and lines labels
+  score_label1 = gtk_label_new("Score:");
+  gtk_label_set_justify(GTK_LABEL(score_label1),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(score_label1);
+  gtk_box_pack_start(GTK_BOX(right_side),score_label1,FALSE,FALSE,3);
 
+  score_label2 = gtk_label_new("0");
+  set_gtk_color_style(score_label2,0xffff,0,0);
+  gtk_label_set_justify(GTK_LABEL(score_label2),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(score_label2);
+  gtk_box_pack_start(GTK_BOX(right_side),score_label2,FALSE,FALSE,3);
 
+  level_label1 = gtk_label_new("Level:");
+  gtk_label_set_justify(GTK_LABEL(level_label1),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(level_label1);
+  gtk_box_pack_start(GTK_BOX(right_side),level_label1,FALSE,FALSE,3);
+
+  sprintf(dmmy,"%d",current_level);
+  level_label2 = gtk_label_new(dmmy);
+  set_gtk_color_style(level_label2,0,0,0xffff);
+  gtk_label_set_justify(GTK_LABEL(level_label2),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(level_label2);
+
+gtk_box_pack_start(GTK_BOX(right_side),level_label2,FALSE,FALSE,3);
+
+  lines_label1 = gtk_label_new("Lines:");
+  gtk_label_set_justify(GTK_LABEL(lines_label1),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(lines_label1);
+  gtk_box_pack_start(GTK_BOX(right_side),lines_label1,FALSE,FALSE,3);
+
+  lines_label2 = gtk_label_new("0");
+  gtk_label_set_justify(GTK_LABEL(lines_label2),GTK_JUSTIFY_RIGHT);
+  gtk_widget_show(lines_label2);
+  gtk_box_pack_start(GTK_BOX(right_side),lines_label2,FALSE,FALSE,3);
+
+ //the game buttons
+  //Start_stop
+  Start_stop_button = gtk_button_new();
+  gtk_widget_show(Start_stop_button);
+  g_signal_connect ((gpointer) Start_stop_button, "clicked",
+                    G_CALLBACK (game_start_stop),
+                    NULL);
+  Start_stop_button_label= gtk_label_new(start_stop_str[0]);
+  box2 = label_box(right_side, Start_stop_button_label,
+                   start_stop_str[0] );
+  gtk_widget_show(box2);
+  gtk_container_add (GTK_CONTAINER (Start_stop_button), box2);
+  gtk_box_pack_start(GTK_BOX(right_side),Start_stop_button,FALSE,FALSE,3);
+  GTK_WIDGET_SET_FLAGS(Start_stop_button, GTK_CAN_DEFAULT);
+  gtk_widget_grab_default(Start_stop_button);
 
 
 
