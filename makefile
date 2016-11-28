@@ -1,6 +1,6 @@
 PROGRAM = gtktetris
 GETTEXT_PACKAGE = gtktetris
-OBJS = misc.o highscore.o tetris.o interface.o
+OBJS = ../function/misc.o ../function/highscore.o ../function/tetris.o ../play/interface.o
 BIN_PATH = /usr/local/bin
 HIGHSCORE_PATH = /usr/local/games/gtktetris
 GROUP = root
@@ -8,6 +8,8 @@ HIGHSCORE_FILE = $(HIGHSCORE_PATH)/highscore.dat
 #SIZE = -DBIGGERBLOCKS
 SIZE = -DBIGBLOCKS
 CC = gcc
+
+
 
 CFLAGS = `pkg-config gtk+-2.0 --cflags` -Wall -O2 \
         -DHIGHSCORE_FILE=\"$(HIGHSCORE_FILE)\" $(SIZE)
@@ -39,10 +41,6 @@ uninstall:
 pack:   
 	rm -rf gtktetris.tgz
 	tar -czvf gtktetris.tgz *.c *.h *.xpm Makefile
-
-
-
-
 
 
 
