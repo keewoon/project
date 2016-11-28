@@ -756,6 +756,63 @@ high_scores1 = gtk_menu_item_new_with_mnemonic ("High-scores");
   gtk_box_pack_start(GTK_BOX(h_box),game_border,FALSE,FALSE,1);
   gtk_widget_show(game_border);
 
+ // game_area
+  game_area = gtk_drawing_area_new();
+  gtk_widget_show(game_area);
+  gtk_drawing_area_size(GTK_DRAWING_AREA(game_area),
+                        MAX_X*BLOCK_WIDTH,MAX_Y*BLOCK_HEIGHT);
+  g_signal_connect ((gpointer) game_area, "expose_event",
+                    G_CALLBACK (game_area_expose_event),
+                    NULL);
+
+  gtk_widget_set_events(game_area, GDK_EXPOSURE_MASK);
+  gtk_container_add(GTK_CONTAINER(game_border),game_area);
+
+  // right_side
+  right_side = gtk_vbox_new(FALSE,0);
+  gtk_box_pack_start(GTK_BOX(h_box),right_side,FALSE,FALSE,0);
+  gtk_widget_show(right_side);
+
+  // next_block_border
+  next_block_border = gtk_frame_new(NULL);
+  gtk_frame_set_shadow_type(GTK_FRAME(next_block_border),GTK_SHADOW_IN);
+  gtk_box_pack_start(GTK_BOX(right_side),next_block_border,FALSE,FALSE,0);
+  gtk_widget_show(next_block_border);
+
+ // game_area
+  game_area = gtk_drawing_area_new();
+  gtk_widget_show(game_area);
+  gtk_drawing_area_size(GTK_DRAWING_AREA(game_area),
+                        MAX_X*BLOCK_WIDTH,MAX_Y*BLOCK_HEIGHT);
+  g_signal_connect ((gpointer) game_area, "expose_event",
+                    G_CALLBACK (game_area_expose_event),
+                    NULL);
+
+  gtk_widget_set_events(game_area, GDK_EXPOSURE_MASK);
+  gtk_container_add(GTK_CONTAINER(game_border),game_area);
+
+  // right_side
+  right_side = gtk_vbox_new(FALSE,0);
+  gtk_box_pack_start(GTK_BOX(h_box),right_side,FALSE,FALSE,0);
+  gtk_widget_show(right_side);
+
+  // next_block_border
+  next_block_border = gtk_frame_new(NULL);
+  gtk_frame_set_shadow_type(GTK_FRAME(next_block_border),GTK_SHADOW_IN);
+  gtk_box_pack_start(GTK_BOX(right_side),next_block_border,FALSE,FALSE,0);
+  gtk_widget_show(next_block_border);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
