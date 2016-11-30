@@ -20,6 +20,8 @@ struct item highscore[NUM_HIGHSCORE];
 void read_highscore()
 {
   FILE *fp;
+
+
   if((fp = fopen(HIGHSCORE_FILE,"r")))
     {
       fread(&highscore,1,sizeof(highscore),fp);
