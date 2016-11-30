@@ -36,16 +36,8 @@ void write_highscore()
   fclose(fp);
 }
 
-void write_highscore()
-{
-  FILE *fp;
-  if(!(fp = fopen(HIGHSCORE_FILE,"w")))
-    return;
-  fwrite(&highscore,1,sizeof(highscore),fp);
-  fclose(fp);
-}
 
-core_close(){
+void highscore_close(){
   gtk_widget_hide(highscore_window);
 }
 
