@@ -64,6 +64,7 @@ void read_highscore();
 void write_highscore();
 void show_highscore(int place);
 void check_highscore();
+void set_gtk_color_style(GtkWidget *w, long red, long green,  long blue);
 int addto_highscore(char *name,long score, int level, int lines);
 
 #endif
