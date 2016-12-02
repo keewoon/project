@@ -76,7 +76,7 @@ gint keyboard_event_handler(GtkWidget *widget, GdkEventKey *event, gpointer data
 	return FALSE;
    switch(event->keyval)
    {
-	case GDK_x; case GDK_X;
+	case GDK_x: case GDK_X:
 	move_block(0,0,1);
 	event->keyval=0;
 	return TRUE;
@@ -138,7 +138,7 @@ gint game_area_expose_event(GtkWidget *widget, GdkEventExpose *event, gpointer u
 	move_blcok(0,0,0);
    }
    else
-	gdk_draw_rectangler(widget->window, 
+	gdk_draw_rectangle(widget->window, 
 			    widget->style->black_gc,
 			    TRUE,
 			    0, 0,
@@ -277,7 +277,6 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 	GtkWidget *About_close_button;
 	GtkWidget *about_label;
 	GtkWidget *about_border;
-	GtkWidget *about_border;
 	GtkWidget *v_box;
 
 	about_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -291,7 +290,7 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 	gtk_container_Add(GTK_CONTAINER(about_window), about_border);
 
 	v_box = gtk_vbox_new(FALSE, 0);
-	gtk_container_Add(GTK_CONTAINER(about_border),v_box);
+	gtk_container_add(GTK_CONTAINER(about_border),v_box);
 
 	about_label = gtk_label_new(  "\nJust another GTK Tetris v0.6.2\n\n"
                                         "(c)1999,2000 Mattias Wadman\n\n"
@@ -303,7 +302,7 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 	g_signal_connect((gpointer) About_close_button, "clicked",
 			 G_CALLBACK (about_close), NULL);
 	gtk_box_pack_start(GTK_BOX(v_box), About_close_button, FALSE, TRUE,0);
-	GTK_WIDGET_sET_FLAGS(About_close_butto, GTK_CAN_DEFAULT);
+	GTK_WIDGET_sET_FLAGS(About_close_button, GTK_CAN_DEFAULT);
 	gtk_widget_grab_default(About_close_button);
 
 	gtk_window_show_all(about_window);
@@ -536,19 +535,19 @@ void read_options()
 int main(int argc,char *argv[])
 {
 	char dmmy[20];
-	GtKWidget *main_window;
-	GtKWidget *v_box;
-	GtKWidget *h_box;
-	GtKWidget *box1;
-	GtKWidget *box2;
-	GtKWidget *right_side;
-	GtKWidget *game_border;
-	GtKWidget *next_block_border;
+	GtkWidget *main_window;
+	GtkWidget *v_box;
+	GtkWidget *h_box;
+	GtkWidget *box1;
+	GtkWidget *box2;
+	GtkWidget *right_side;
+	GtkWidget *game_border;
+	GtkWidget *next_block_border;
 	GdkBitmap *mask;
-	GtKWidget *menu_bar;
-	GtKWidget *menu_game;
-	GtKWidget *menu_game_menu;
-	GtKWidget *separatormenuitem1;
+	GtkWidget *menu_bar;
+	GtkWidget *menu_game;
+	GtkWidget *menu_game_menu;
+	GtkWidget *separatormenuitem1;
 	GtkWidget *separator1;
 	GtkWidget *menu_settings;
  	GtkWidget *menu_settings_menu;
@@ -650,8 +649,7 @@ int main(int argc,char *argv[])
 	menu_game_quit = gtk_menu_item_new_with_mnemonic ("Quit");
 	gtk_widget_show (menu_game_quit);
 	gtk_container_add (GTK_CONTAINER (menu_game_menu), menu_game_quit);
-	g_signal_connect ((gpointer) menu_game_quit, "activate",
-                    G_CALLBACK (gtk_main_quit),
+	g_signal_connect ((gpointer) menu_game_quit, "activate", G_CALLBACK (gtk_main_quit),NULL);
 	gtk_widget_add_accelerator(menu_game_quit,"activate", accel_group,
                              GDK_X, GDK_CONTROL_MASK,
                              GTK_ACCEL_VISIBLE);
