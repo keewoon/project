@@ -123,7 +123,7 @@ void game_show_next_block(GtkMenuItem *menuitem, gpointer user_data)
    options.shw_nxt = !options.shw_nxt;
    if(!game_over)
    {
-	if(!option.shw_nxt)
+	if(!options.shw_nxt)
 	   draw_block(0,0,next_block, next_frame, TRUE, TRUE);
 	else
 	   draw_block(0,0,next_block, next_frame, FALSE, TRUE);
@@ -374,7 +374,7 @@ void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
 	g_signal_connect ((gpointer) Help_close_button, "clicked", 
 			  G_CALLBACK (help_close), NULL);
 
-	gtk_box_pack_start(GTK_BOX(vbox), HELP_close_buttion, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), Help_close_buttion, FALSE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS(Help_close_button, GTK_CAN_DEFAULT);
 	gtk_window_grab_default(Help_close_button);
 
@@ -510,10 +510,10 @@ void show_highscore_wrapper(GtkMenuItem	*menuitem, gpointer	user_data)
 	show_highscore(0);
 }
 
-void save_option(GtkMenuItem	*menuitem, gpointer	user_data)
+void save_options(GtkMenuItem	*menuitem, gpointer	user_data)
 {
 	FILE *fp;
-	if(!(fp = fopen(option_f, "wb")))
+	if(!(fp = fopen(options_f, "wb")))
 	{
 		printf("gtktetris: Write ERROR!\n");
 		return;
@@ -698,9 +698,7 @@ int main(int argc,char *argv[])
   gtk_widget_show (menu_save_options);
   gtk_container_add (GTK_CONTAINER (menu_settings_menu),
                      menu_save_options);
-  g_signal_connect ((gpointer) menu_save_options, "activate",
-                    G_CALLBACK (save_options),
-                    NULL);
+  g_signal_connect ((gpointer) menu_save_options, "activate", G_CALLBACK (save_options), NULL);
 
 	//Help sub-menu
   menu_help=gtk_menu_item_new_with_mnemonic ("_Help");
