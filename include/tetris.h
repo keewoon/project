@@ -1,4 +1,4 @@
-#ifdef _TETRIS_H_
+#ifndef _TETRIS_H_
 #define _TETRIS_H_
 
 #include <gtk/gtk.h>
@@ -67,6 +67,6 @@ void new_block();
 void game_over_clean();
 void game_init();
 void make_noise(int level,int height);    
-
+void set_block(int x,int y,int color,int next);
 
 #endif                  
