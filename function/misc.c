@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <string.h>
 
-#include "../include/tetris.h"
+#include "../include/misc.h"
 
 void set_block(int x,int y,int color,int next)
 {
