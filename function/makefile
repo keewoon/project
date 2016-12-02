@@ -13,10 +13,17 @@ CC = gcc
 
 
 libfuncs.a: highscore.o misc.o tetris.o
+<<<<<<< HEAD
    ar rv libfuncs.a highscore.o misc.o tetris.o
 all: $(OBJS)
    $(CC) $(CFLAGS) $(OBJS) -o $(PROGRAM) $(LIBS)
    strip $(PROGRAM)
+=======
+	ar rv libfuncs.a highscore.o misc.o tetris.o
+all: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(PROGRAM) $(LIBS)
+	strip $(PROGRAM)
+>>>>>>> 31657d565dc64dc881f5c5fbef8a7b8894d3827b
 clean:
 	rm -f highscore.o misc.o tetris.o
 
