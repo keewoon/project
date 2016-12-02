@@ -68,5 +68,9 @@ void game_over_clean();
 void game_init();
 void make_noise(int level,int height);    
 void set_block(int x,int y,int color,int next);
+void update_game_values();
+int do_random(int max);
+void game_over_init();
+
 
 #endif                  
