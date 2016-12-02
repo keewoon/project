@@ -26,7 +26,6 @@ int game_play;
 char options_f[100];
 char *pause_str[2]={"Pause\0","Resume\0"};
 char *start_stop_str[2]={"Start Game\0","Stop game\0"};
-gint timer;
 GtkWidget *score_label1;
 GtkWidget *score_label2;
 GtkWidget *level_label1;
@@ -50,7 +49,7 @@ GtkWidget *Pause_button;
 GtkWidget *Pause_button_label;
 GtkWidget *help_window;
 GtkWidget *about_window;
-
+gint timer;
 
 
 int level_speeds[NUM_LEVELS] = {1000,886,785,695,616,546,483,428,379,336,298,
@@ -59,15 +58,14 @@ void update_game_values()
 {
         char dummy[20] = "";
 
-        sprintf(dummy,"%lu",current_score);	
+        sprintf(dummy,"%lu",current_score);
         set_label(score_label2,dummy);
-
         sprintf(dummy,"%d",current_level);
         set_label(level_label2,dummy);
-
         sprintf(dummy,"%d",current_lines);
         set_label(lines_label2,dummy);
 }
+
 
 gint keyboard_event_handler(GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
@@ -135,7 +133,7 @@ gint game_area_expose_event(GtkWidget *widget, GdkEventExpose *event, gpointer u
    if(!game_over)
    {
 	from_virtual();
-	move_blcok(0,0,0);
+	move_block(0,0,0);
    }
    else
 	gdk_draw_rectangle(widget->window, 
@@ -205,8 +203,8 @@ void game_set_pause(GtkWidget    *menuitem,
 void game_over_init()
 {
         int high_dummy;
-        read_highscore();
-        if(current_score && (high_dummy = addto_highscore((char *)getenv("USER"),current_score,current_level,current_lines)))
+	read_highscore();
+	if(current_score && (high_dummy = addto_highscore((char *)getenv("USER"),current_score,current_level,current_lines)))
         {
                 write_highscore();
                 show_highscore(high_dummy);
@@ -287,7 +285,7 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 
 	about_border = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(about_border), GTK_SHADOW_OUT);
-	gtk_container_Add(GTK_CONTAINER(about_window), about_border);
+	gtk_container_add(GTK_CONTAINER(about_window), about_border);
 
 	v_box = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(about_border),v_box);
@@ -302,10 +300,10 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 	g_signal_connect((gpointer) About_close_button, "clicked",
 			 G_CALLBACK (about_close), NULL);
 	gtk_box_pack_start(GTK_BOX(v_box), About_close_button, FALSE, TRUE,0);
-	GTK_WIDGET_sET_FLAGS(About_close_button, GTK_CAN_DEFAULT);
+	GTK_WIDGET_SET_FLAGS(About_close_button, GTK_CAN_DEFAULT);
 	gtk_widget_grab_default(About_close_button);
 
-	gtk_window_show_all(about_window);
+	gtk_widget_show_all(about_window);
 
 }
 
@@ -329,14 +327,14 @@ void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
 	gtk_container_border_width(GTK_CONTAINER(help_window),1);
 	
 	help_border = gtk_frame_new(NULL);
-	gtk_frame_Set_shadow_type(GTK_FRAME(help_border), GTK_SHADOW_OUT);
+	gtk_frame_set_shadow_type(GTK_FRAME(help_border), GTK_SHADOW_OUT);
 	gtk_container_add(GTK_CONTAINER(help_window), help_border);
 
 	vbox = gtk_vbox_new(FALSE, 3);
 	gtk_container_add(GTK_CONTAINER(help_border), vbox);
 
 	hbox = gtk_hbox_new(FALSE, 30);
-	gtk_container_add(GTK_CONTATINER(vbox), hbox);
+	gtk_container_add(GTK_CONTAINER(vbox), hbox);
 
 	help_label = gtk_label_new(	"\nKeys:\n"
 					"Right and \"d\"\n"
@@ -366,7 +364,7 @@ void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
                                         "40\n100\n"
                                         "300\n1200\n");
 
-	gtk_mise_set_alignment(GTK_MISC(help_label), 0,0);
+	gtk_misc_set_alignment(GTK_MISC(help_label), 0,0);
 	gtk_label_set_justify(GTK_LABEL(help_label), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start(GTK_BOX(hbox), help_label, TRUE, TRUE, TRUE);
 	
@@ -374,9 +372,9 @@ void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
 	g_signal_connect ((gpointer) Help_close_button, "clicked", 
 			  G_CALLBACK (help_close), NULL);
 
-	gtk_box_pack_start(GTK_BOX(vbox), Help_close_buttion, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), Help_close_button, FALSE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS(Help_close_button, GTK_CAN_DEFAULT);
-	gtk_window_grab_default(Help_close_button);
+	gtk_widget_grab_default(Help_close_button);
 
 	gtk_widget_show_all(help_window);
 }
@@ -834,7 +832,7 @@ gtk_box_pack_start(GTK_BOX(right_side),level_label2,FALSE,FALSE,3);
   gtk_box_pack_start(GTK_BOX(right_side),lines_label2,FALSE,FALSE,3);
 
  //the game buttons
-  //Start_stop
+   //Start_stop
   Start_stop_button = gtk_button_new();
   gtk_widget_show(Start_stop_button);
   g_signal_connect ((gpointer) Start_stop_button, "clicked",
@@ -848,6 +846,7 @@ gtk_box_pack_start(GTK_BOX(right_side),level_label2,FALSE,FALSE,3);
   gtk_box_pack_start(GTK_BOX(right_side),Start_stop_button,FALSE,FALSE,3);
   GTK_WIDGET_SET_FLAGS(Start_stop_button, GTK_CAN_DEFAULT);
   gtk_widget_grab_default(Start_stop_button);
+
 
  //Pause
   Pause_button = gtk_button_new();
