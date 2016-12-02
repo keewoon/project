@@ -17,7 +17,7 @@
 #ifdef BIGGERBLOCKS
 #include "bbig_blocks.xpm"
 #else
-#include "block.xpm"
+#include "blocks.xpm"
 #endif
 #endif
 
