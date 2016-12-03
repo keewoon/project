@@ -61,10 +61,7 @@ struct Options options;
 void set_block(int x, int y, int color, int next);
 int do_random(int max);
 void set_label(GtkWidget *label, char *str);
-<<<<<<< HEAD
 
-=======
->>>>>>> f695707f03fe083cb19e26f57b305c254e9c517a
 void add_submenu(gchar *name, GtkWidget *menu, GtkWidget *menu_bar, int right);
 GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
 GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
