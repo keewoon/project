@@ -11,11 +11,11 @@
 #define MAX_X 10
 #define MAX_Y 18
 
-#ifndef BIGBLOCKS
+#ifdef BIGBLOCKS
 #define BLOCK_WIDTH 22
 #define BLOCK_HEIGHT 22
 #else
-#ifndef BIGGERBLOCKS
+#ifdef BIGGERBLOCKS
 #define BLOCK_WIDTH 33
 #define BLOCK_HEIGHT 33
 #else
@@ -61,5 +61,21 @@ void update_game_values();
 int game_loop();
 void game_over_init();
 void game_set_pause();
+void set_label(GtkWidget *label,char *str);
+void move_block(int x,int y,int f);
+int move_down();
+void draw_block(int x,int y,int block,int frame,int clear,int next);
+void from_virtual();
+void set_gtk_color_style(GtkWidget *w, long red, long green,  long blue);
+void get_opt_file(char *buf, int len);
+void read_highscore();
+void write_highscore();
+void show_highscore(int place);
+void game_init();
+void make_noise(int level,int height);
+int addto_highscore(char *name,long score, int level, int lines);
+GtkWidget *label_box (GtkWidget *parent, GtkWidget *label, gchar *label_text);
+
+
 
 #endif

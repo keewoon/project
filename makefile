@@ -22,17 +22,6 @@ all: $(OBJS)
 
 clean: 
 	rm -f *.o *~ $(PROGRAM)
-
-install:
-	mkdir -p $(BIN_PATH)
-	mkdir -p $(HIGHSCORE_PATH)
-	install -o root -g $(GROUP) $(PROGRAM) $(BIN_PATH)
-	if [ ! -f $(HIGHSCORE_FILE) ]; then \
-                : > $(HIGHSCORE_FILE); \
-        fi
-	chown root.$(GROUP) $(HIGHSCORE_FILE)
-	chmod 666 $(HIGHSCORE_FILE)
-#       ln -s $(BIN_PATH)/$(PROGRAM) /usr/games/bin/tetris
 uninstall:
 	rm -i $(BIN_PATH)/$(PROGRAM)
 	rm -i $(HIGHSCORE_FILE)
