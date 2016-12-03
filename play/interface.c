@@ -374,7 +374,7 @@ void show_help(GtkMenuItem	*menuitem, gpointer	user_data)
 	g_signal_connect ((gpointer) Help_close_button, "clicked", 
 			  G_CALLBACK (help_close), NULL);
 
-	gtk_box_pack_start(GTK_BOX(vbox), Help_close_buttion, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), Help_close_button, FALSE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS(Help_close_button, GTK_CAN_DEFAULT);
 	gtk_window_grab_default(Help_close_button);
 

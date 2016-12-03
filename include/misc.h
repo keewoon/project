@@ -61,7 +61,8 @@ struct Options options;
 void set_block(int x, int y, int color, int next);
 int do_random(int max);
 void set_label(GtkWidget *label, char *str);
-void add_submenu((gchar *name, GtkWidget *menu, GtkWidget *menu_bar, int right);
+
+void add_submenu(gchar *name, GtkWidget *menu, GtkWidget *menu_bar, int right);
 GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
 GtkWidget *add_menu_item_toggle(gchar *name, GtkSignalFunc func, gpointer data, gint state, GtkWidget *menu);
 void set_gtk_color_style(GtkWidget *w, long red, long green, long blue);

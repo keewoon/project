@@ -10,7 +10,7 @@ void set_block(int x,int y,int color,int next)
 {
         gdk_draw_pixmap((!next ? game_area->window : next_block_area->window),
                         (!next ? game_area->style->black_gc : next_block_area->style->black_gc),
-                        blocks_pixmap,
+			blocks_pixmap,
                         color*BLOCK_WIDTH,0,
                         x*BLOCK_WIDTH,y*BLOCK_HEIGHT,
                         BLOCK_WIDTH,BLOCK_HEIGHT);
