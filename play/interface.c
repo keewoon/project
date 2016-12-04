@@ -556,7 +556,7 @@ int main(int argc,char *argv[])
 	GtkWidget *separator2;
  	GtkWidget *about1;
 	GtkAccelGroup* accel_group;
-	struct sigaction sa;
+	
 	  //init game values
 	 game_play=FALSE;
 	 get_opt_file(options_f,100);
