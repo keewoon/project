@@ -86,18 +86,13 @@ void show_highscore(int place)
 
         label = gtk_label_new(" Level: ");
         gtk_widget_show(label);
-	gtk_table_attach_defaults(GTK_TABLE(table),label,2,3,0,1);
-
-        label = gtk_label_new(" Level: ");
-        gtk_widget_show(label);
         gtk_table_attach_defaults(GTK_TABLE(table),label,3,4,0,1);
 
         label = gtk_label_new(" Score: ");
         gtk_widget_show(label);
         gtk_table_attach_defaults(GTK_TABLE(table),label,4,5,0,1);
   
-	for(temp=0;temp < NUM_HIGHSCORE;temp++)
-        {
+	for(temp=0;temp < NUM_HIGHSCORE;temp++)        {
                 sprintf(dummy,"%d",temp+1);
                 label = gtk_label_new(dummy);
                 gtk_table_attach_defaults(GTK_TABLE(table),label,0,1,temp+1,temp+2);
