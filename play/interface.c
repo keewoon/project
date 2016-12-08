@@ -290,10 +290,6 @@ void show_about(GtkMenuItem	*menuitem, gpointer	user_data)
 	v_box = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(about_border),v_box);
 
-	about_label = gtk_label_new(  "\nJust another GTK Tetris v0.6.2\n\n"
-                                        "(c)1999,2000 Mattias Wadman\n\n"
-                                        "Modified by Iavor Veltchev, 2002-2006\n\n"
-                                        "This program is distributed under the terms of GPL.\n");
 	gtk_box_pack_start(GTK_BOX(v_box), about_label, FALSE, FALSE, 0);
 
 	About_close_button = gtk_button_new_with_label("Close");
